@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Redirect to login page if user is not authenticated
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAuthenticated = localStorage.getItem('authenticated'); // Example authentication check
+            if (!isAuthenticated) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
 </head>
 <body class="bg-gray-100">
     <!-- Navbar -->
@@ -15,7 +24,7 @@
                 <a href="index.html" class="px-3 hover:underline">Home</a>
                 <a href="shop.html" class="px-3 hover:underline">Shop</a>
                 <a href="admin.html" class="px-3 hover:underline">Admin</a>
-                <a href="login.html" class="px-3 hover:underline">Login</a>
+                <a href="login.html" class="px-3 hover:underline">Logout</a>
             </nav>
         </div>
     </header>
