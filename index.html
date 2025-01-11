@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-commerce Software</title>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <title>E-Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
@@ -13,182 +12,40 @@
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold">E-Shop</h1>
             <nav>
-                <a href="#" class="px-3 hover:underline">Home</a>
-                <a href="#" class="px-3 hover:underline">Shop</a>
-                <a href="#" class="px-3 hover:underline">Admin</a>
-                <a href="#login" class="px-3 hover:underline">Login</a>
+                <a href="index.html" class="px-3 hover:underline">Home</a>
+                <a href="shop.html" class="px-3 hover:underline">Shop</a>
+                <a href="admin.html" class="px-3 hover:underline">Admin</a>
+                <a href="login.html" class="px-3 hover:underline">Login</a>
             </nav>
         </div>
     </header>
 
-    <!-- Login Page -->
-    <section id="login" class="container mx-auto my-10 bg-white shadow-md p-6 rounded">
-        <h2 class="text-2xl font-bold mb-5">Login</h2>
-        <form id="login-form" class="space-y-4">
-            <div>
-                <label for="email" class="block font-bold mb-2">Email</label>
-                <input type="email" id="email" placeholder="Enter your email" class="w-full border p-2 rounded">
-            </div>
-            <div>
-                <label for="password" class="block font-bold mb-2">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" class="w-full border p-2 rounded">
-            </div>
-            <button type="button" id="login-button" class="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Login</button>
-        </form>
-    </section>
-
-    <!-- Product List -->
+    <!-- Main Section -->
     <main class="container mx-auto my-10">
-        <h2 class="text-2xl font-bold mb-5">Products</h2>
+        <h2 class="text-2xl font-bold mb-5">Welcome to E-Shop!</h2>
+        <p class="text-gray-700 mb-5">Discover the best products and shop with ease.</p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Product Card -->
-            <div class="bg-white shadow-md rounded p-4" x-data="{ quantity: 1 }">
-                <img src="https://via.placeholder.com/150" alt="Product Image" class="w-full h-48 object-cover rounded mb-4">
-                <h3 class="font-bold text-lg">Product Name</h3>
-                <p class="text-gray-700">$20.00</p>
-                <div class="mt-4 flex items-center space-x-3">
-                    <button @click="quantity = Math.max(1, quantity - 1)" class="px-3 py-1 bg-gray-200 rounded">-</button>
-                    <span x-text="quantity" class="font-bold"></span>
-                    <button @click="quantity++" class="px-3 py-1 bg-gray-200 rounded">+</button>
-                </div>
-                <button class="w-full mt-4 px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Add to Cart</button>
+            <!-- Feature Card -->
+            <div class="bg-white shadow-md rounded p-4">
+                <h3 class="font-bold text-lg mb-2">Shop Products</h3>
+                <p class="text-gray-600">Browse our wide range of products.</p>
+                <a href="shop.html" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Shop Now</a>
+            </div>
+            <div class="bg-white shadow-md rounded p-4">
+                <h3 class="font-bold text-lg mb-2">Admin Panel</h3>
+                <p class="text-gray-600">Manage products, orders, and users.</p>
+                <a href="admin.html" class="mt-4 inline-block px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Go to Admin</a>
+            </div>
+            <div class="bg-white shadow-md rounded p-4">
+                <h3 class="font-bold text-lg mb-2">Login</h3>
+                <p class="text-gray-600">Access your account.</p>
+                <a href="login.html" class="mt-4 inline-block px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Login</a>
             </div>
         </div>
     </main>
 
-    <!-- Admin Panel -->
-    <section class="container mx-auto my-10 bg-white shadow-md p-6 rounded" x-data="{ activeTab: 'products' }">
-        <h2 class="text-2xl font-bold mb-5">Admin Panel</h2>
-
-        <!-- Tabs Navigation -->
-        <div class="mb-5 flex space-x-4">
-            <button @click="activeTab = 'products'" :class="activeTab === 'products' ? 'bg-blue-500 text-white' : 'bg-gray-200'" class="px-4 py-2 rounded">Manage Products</button>
-            <button @click="activeTab = 'orders'" :class="activeTab === 'orders' ? 'bg-blue-500 text-white' : 'bg-gray-200'" class="px-4 py-2 rounded">Manage Orders</button>
-            <button @click="activeTab = 'users'" :class="activeTab === 'users' ? 'bg-blue-500 text-white' : 'bg-gray-200'" class="px-4 py-2 rounded">Manage Users</button>
-        </div>
-
-        <!-- Manage Products Tab -->
-        <div x-show="activeTab === 'products'">
-            <form id="product-form" class="mb-5">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" id="product-name" placeholder="Product Name" class="border p-2 rounded">
-                    <input type="number" id="product-price" placeholder="Price" class="border p-2 rounded">
-                    <input type="text" id="product-image" placeholder="Image URL" class="border p-2 rounded">
-                </div>
-                <button type="button" id="add-product" class="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Add Product</button>
-            </form>
-            <div>
-                <h3 class="font-bold text-lg mb-3">Manage Products</h3>
-                <table class="w-full border-collapse border border-gray-200">
-                    <thead>
-                        <tr class="bg-gray-200">
-                            <th class="border px-4 py-2">Name</th>
-                            <th class="border px-4 py-2">Price</th>
-                            <th class="border px-4 py-2">Image</th>
-                            <th class="border px-4 py-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="product-list"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Manage Orders Tab -->
-        <div x-show="activeTab === 'orders'">
-            <h3 class="font-bold text-lg mb-3">Manage Orders</h3>
-            <table class="w-full border-collapse border border-gray-200">
-                <thead>
-                    <tr class="bg-gray-200">
-                        <th class="border px-4 py-2">Order ID</th>
-                        <th class="border px-4 py-2">Customer</th>
-                        <th class="border px-4 py-2">Total</th>
-                        <th class="border px-4 py-2">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border px-4 py-2">#001</td>
-                        <td class="border px-4 py-2">John Doe</td>
-                        <td class="border px-4 py-2">$100.00</td>
-                        <td class="border px-4 py-2">Pending</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Manage Users Tab -->
-        <div x-show="activeTab === 'users'">
-            <h3 class="font-bold text-lg mb-3">Manage Users</h3>
-            <table class="w-full border-collapse border border-gray-200">
-                <thead>
-                    <tr class="bg-gray-200">
-                        <th class="border px-4 py-2">User ID</th>
-                        <th class="border px-4 py-2">Name</th>
-                        <th class="border px-4 py-2">Email</th>
-                        <th class="border px-4 py-2">Role</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border px-4 py-2">#001</td>
-                        <td class="border px-4 py-2">Jane Smith</td>
-                        <td class="border px-4 py-2">jane@example.com</td>
-                        <td class="border px-4 py-2">Admin</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <script>
-        const productForm = document.getElementById('product-form');
-        const productList = document.getElementById('product-list');
-        const products = [];
-
-        document.getElementById('add-product').addEventListener('click', () => {
-            const name = document.getElementById('product-name').value;
-            const price = document.getElementById('product-price').value;
-            const image = document.getElementById('product-image').value;
-
-            if (name && price && image) {
-                const product = { name, price, image };
-                products.push(product);
-                renderProducts();
-                productForm.reset();
-            } else {
-                alert('Please fill all fields');
-            }
-        });
-
-        function renderProducts() {
-            productList.innerHTML = '';
-            products.forEach((product, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td class="border px-4 py-2">${product.name}</td>
-                    <td class="border px-4 py-2">$${product.price}</td>
-                    <td class="border px-4 py-2"><img src="${product.image}" alt="${product.name}" class="h-10"></td>
-                    <td class="border px-4 py-2">
-                        <button onclick="editProduct(${index})" class="px-3 py-1 bg-yellow-500 text-white rounded">Edit</button>
-                        <button onclick="deleteProduct(${index})" class="px-3 py-1 bg-red-500 text-white rounded">Delete</button>
-                    </td>
-                `;
-                productList.appendChild(row);
-            });
-        }
-
-        function deleteProduct(index) {
-            products.splice(index, 1);
-            renderProducts();
-        }
-
-        function editProduct(index) {
-            const product = products[index];
-            document.getElementById('product-name').value = product.name;
-            document.getElementById('product-price').value = product.price;
-            document.getElementById('product-image').value = product.image;
-            deleteProduct(index);
-        }
-    </script>
+    <footer class="bg-gray-800 text-white p-4 text-center">
+        <p>&copy; 2025 E-Shop. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
