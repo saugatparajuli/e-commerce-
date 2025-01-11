@@ -3,58 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Shop</title>
+    <title>E-Commerce Software</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Redirect to login page if user is not authenticated
-        document.addEventListener('DOMContentLoaded', () => {
-            const isAuthenticated = localStorage.getItem('authenticated'); // Example authentication check
-            if (!isAuthenticated) {
-                window.location.href = 'login.html';
-            }
-        });
-    </script>
 </head>
 <body class="bg-gray-100">
     <!-- Navbar -->
-    <header class="bg-blue-500 p-4 text-white">
+    <header class="bg-blue-600 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold">E-Shop</h1>
+            <h1 class="text-xl font-bold">E-Commerce</h1>
             <nav>
-                <a href="index.html" class="px-3 hover:underline">Home</a>
-                <a href="shop.html" class="px-3 hover:underline">Shop</a>
-                <a href="admin.html" class="px-3 hover:underline">Admin</a>
-                <a href="login.html" class="px-3 hover:underline">Logout</a>
+                <ul class="flex space-x-4">
+                    <li><a href="#products" class="hover:underline">Products</a></li>
+                    <li><a href="#admin" class="hover:underline">Admin Panel</a></li>
+                </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Main Section -->
-    <main class="container mx-auto my-10">
-        <h2 class="text-2xl font-bold mb-5">Welcome to E-Shop!</h2>
-        <p class="text-gray-700 mb-5">Discover the best products and shop with ease.</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Feature Card -->
-            <div class="bg-white shadow-md rounded p-4">
-                <h3 class="font-bold text-lg mb-2">Shop Products</h3>
-                <p class="text-gray-600">Browse our wide range of products.</p>
-                <a href="shop.html" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Shop Now</a>
+    <!-- Products Section -->
+    <section id="products" class="container mx-auto py-10">
+        <h2 class="text-2xl font-bold text-center mb-6">Available Products</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-4 shadow rounded">
+                <h3 class="text-lg font-bold">Product 1</h3>
+                <p class="text-gray-700">Description of product 1.</p>
+                <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Buy Now</button>
             </div>
-            <div class="bg-white shadow-md rounded p-4">
-                <h3 class="font-bold text-lg mb-2">Admin Panel</h3>
-                <p class="text-gray-600">Manage products, orders, and users.</p>
-                <a href="admin.html" class="mt-4 inline-block px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Go to Admin</a>
+            <div class="bg-white p-4 shadow rounded">
+                <h3 class="text-lg font-bold">Product 2</h3>
+                <p class="text-gray-700">Description of product 2.</p>
+                <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Buy Now</button>
             </div>
-            <div class="bg-white shadow-md rounded p-4">
-                <h3 class="font-bold text-lg mb-2">Login</h3>
-                <p class="text-gray-600">Access your account.</p>
-                <a href="login.html" class="mt-4 inline-block px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Login</a>
+            <div class="bg-white p-4 shadow rounded">
+                <h3 class="text-lg font-bold">Product 3</h3>
+                <p class="text-gray-700">Description of product 3.</p>
+                <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Buy Now</button>
             </div>
         </div>
-    </main>
+    </section>
 
-    <footer class="bg-gray-800 text-white p-4 text-center">
-        <p>&copy; 2025 E-Shop. All Rights Reserved.</p>
-    </footer>
+    <!-- Admin Panel -->
+    <section id="admin" class="container mx-auto py-10">
+        <h2 class="text-2xl font-bold text-center mb-6">Admin Panel</h2>
+        <div class="bg-white p-6 shadow rounded">
+            <h3 class="text-lg font-bold mb-4">Manage Products</h3>
+            <form id="productForm" class="mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input type="text" id="productName" class="border p-2 rounded" placeholder="Product Name" required>
+                    <textarea id="productDescription" class="border p-2 rounded" placeholder="Product Description" required></textarea>
+                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Add Product</button>
+                </div>
+            </form>
+            <table class="w-full border-collapse border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 p-2">ID</th>
+                        <th class="border border-gray-300 p-2">Name</th>
+                        <th class="border border-gray-300 p-2">Description</th>
+                        <th class="border border-gray-300 p-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="productTable">
+                    <!-- Dynamically added rows -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script>
+        let productId = 1;
+        const productTable = document.getElementById('productTable');
+        const productForm = document.getElementById('productForm');
+
+        productForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const productName = document.getElementById('productName').value;
+            const productDescription = document.getElementById('productDescription').value;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="border border-gray-300 p-2">${productId++}</td>
+                <td class="border border-gray-300 p-2">${productName}</td>
+                <td class="border border-gray-300 p-2">${productDescription}</td>
+                <td class="border border-gray-300 p-2">
+                    <button class="bg-yellow-500 text-white px-2 py-1 rounded editBtn">Edit</button>
+                    <button class="bg-red-600 text-white px-2 py-1 rounded deleteBtn">Delete</button>
+                </td>
+            `;
+            productTable.appendChild(row);
+            productForm.reset();
+
+            row.querySelector('.deleteBtn').addEventListener('click', () => row.remove());
+            row.querySelector('.editBtn').addEventListener('click', () => editProduct(row));
+        });
+
+        function editProduct(row) {
+            const nameCell = row.children[1];
+            const descCell = row.children[2];
+
+            const newName = prompt('Edit Product Name:', nameCell.textContent);
+            const newDescription = prompt('Edit Product Description:', descCell.textContent);
+
+            if (newName !== null && newDescription !== null) {
+                nameCell.textContent = newName;
+                descCell.textContent = newDescription;
+            }
+        }
+    </script>
 </body>
 </html>
